@@ -1,0 +1,16 @@
+﻿<Application x:Class="BhopScriptWPF.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Startup="Application_Startup">
+    <Application.Resources>
+        <!-- Современные цвета Catppuccin Macchiato -->
+        <SolidColorBrush x:Key="Background" Color="#181825"/>
+        <SolidColorBrush x:Key="Surface" Color="#1E1E2E"/>
+        <SolidColorBrush x:Key="Text" Color="#CDD6F4"/>
+        <SolidColorBrush x:Key="Subtext" Color="#BAC2DE"/>
+        <SolidColorBrush x:Key="Blue" Color="#89B4FA"/>
+        <SolidColorBrush x:Key="Green" Color="#A6E3A1"/>
+        <SolidColorBrush x:Key="Red" Color="#F38BA8"/>
+        <SolidColorBrush x:Key="Yellow" Color="#F9E2AF"/>
+    </Application.Resources>
+</Application>

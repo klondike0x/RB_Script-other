@@ -1,0 +1,244 @@
+﻿<Window x:Class="BhopScriptWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BhopScriptWPF"
+        mc:Ignorable="d"
+        Title="AutoBhop Pro" 
+        Height="550" 
+        Width="400"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Topmost="True">
+
+    <Window.Resources>
+        <Style x:Key="ModernCard" TargetType="Border">
+            <Setter Property="Background" Value="#1E1E2E"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#313244"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="20" Opacity="0.3" ShadowDepth="0"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ModernButton" TargetType="Button">
+            <Setter Property="Background" Value="#585B70"/>
+            <Setter Property="Foreground" Value="#CDD6F4"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="15,8"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="10" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#45475A"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#313244"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="TitleText" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#CDD6F4"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+
+        <Style x:Key="LabelText" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#BAC2DE"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="0,0,0,8"/>
+        </Style>
+    </Window.Resources>
+
+    <Border CornerRadius="20" Background="#181825" BorderThickness="1" BorderBrush="#313244">
+        <Grid>
+            <!-- Верхняя панель -->
+            <Border Height="40" Background="Transparent" VerticalAlignment="Top"
+                    MouseLeftButtonDown="Border_MouseLeftButtonDown">
+                <Grid>
+                    <TextBlock Text="🚀 AutoBhop Pro" Style="{StaticResource TitleText}"
+                               Margin="20,0,0,0" VerticalAlignment="Center"/>
+                    <Button x:Name="btnClose" Content="×" FontSize="20" Width="30" Height="30"
+                            HorizontalAlignment="Right" Margin="0,0,10,0" Background="Transparent"
+                            Foreground="#CDD6F4" BorderThickness="0" Click="btnClose_Click" Cursor="Hand">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border CornerRadius="15" Background="Transparent">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#F38BA8"/>
+                                        <Setter Property="Foreground" Value="#1E1E2E"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </Grid>
+            </Border>
+
+            <!-- Основной контент -->
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="20,50,20,20">
+                <StackPanel>
+
+                    <!-- Горячие клавиши -->
+                    <Border Style="{StaticResource ModernCard}" Margin="0,0,0,15" Padding="20">
+                        <StackPanel>
+                            <TextBlock Text="🎮 Горячие клавиши" Style="{StaticResource TitleText}" Margin="0,0,0,15"/>
+
+                            <StackPanel Margin="0,0,0,10">
+                                <TextBlock Text="Вкл/Выкл:" Style="{StaticResource LabelText}"/>
+                                <Border CornerRadius="8" Background="#313244" Padding="15,10">
+                                    <Grid>
+                                        <TextBlock x:Name="tbToggleKey" Text="F1" Foreground="#F9E2AF"
+                                                   FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <Button x:Name="btnChangeToggleKey" Content="✏️" Width="30" Height="30"
+                                                HorizontalAlignment="Right" Background="Transparent" Foreground="#89B4FA"
+                                                BorderThickness="0" Click="btnChangeToggleKey_Click" ToolTip="Изменить клавишу"/>
+                                    </Grid>
+                                </Border>
+                            </StackPanel>
+
+                            <StackPanel>
+                                <TextBlock Text="Клавиша прыжка:" Style="{StaticResource LabelText}"/>
+                                <Border CornerRadius="8" Background="#313244" Padding="15,10">
+                                    <Grid>
+                                        <TextBlock x:Name="tbJumpKey" Text="Space" Foreground="#F9E2AF"
+                                                   FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <Button x:Name="btnChangeJumpKey" Content="✏️" Width="30" Height="30"
+                                                HorizontalAlignment="Right" Background="Transparent" Foreground="#89B4FA"
+                                                BorderThickness="0" Click="btnChangeJumpKey_Click" ToolTip="Изменить клавишу"/>
+                                    </Grid>
+                                </Border>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Настройки задержки -->
+                    <Border Style="{StaticResource ModernCard}" Margin="0,0,0,15" Padding="20">
+                        <StackPanel>
+                            <TextBlock Text="⚙️ Настройки прыжков" Style="{StaticResource TitleText}" Margin="0,0,0,15"/>
+
+                            <!-- Минимальная задержка -->
+                            <StackPanel Margin="0,0,0,15">
+                                <TextBlock Text="Минимальная задержка (мс):" Style="{StaticResource LabelText}"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="70"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Slider x:Name="sliderMinDelay" Grid.Column="0" Minimum="1" Maximum="200" Value="30"
+                                            VerticalAlignment="Center" Margin="0,0,10,0" ValueChanged="SliderMinDelay_ValueChanged"/>
+                                    <Border Grid.Column="1" CornerRadius="8" Background="#313244" Height="30">
+                                        <TextBlock x:Name="tbMinDelay" Text="30" Foreground="#F9E2AF"
+                                                   FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </Grid>
+                            </StackPanel>
+
+                            <!-- Максимальная задержка -->
+                            <StackPanel>
+                                <TextBlock Text="Максимальная задержка (мс):" Style="{StaticResource LabelText}"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="70"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Slider x:Name="sliderMaxDelay" Grid.Column="0" Minimum="1" Maximum="200" Value="50"
+                                            VerticalAlignment="Center" Margin="0,0,10,0" ValueChanged="SliderMaxDelay_ValueChanged"/>
+                                    <Border Grid.Column="1" CornerRadius="8" Background="#313244" Height="30">
+                                        <TextBlock x:Name="tbMaxDelay" Text="50" Foreground="#F9E2AF"
+                                                   FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </Grid>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Статус -->
+                    <Border Style="{StaticResource ModernCard}" Margin="0,0,0,15" Padding="20">
+                        <StackPanel>
+                            <TextBlock Text="📊 Статус" Style="{StaticResource TitleText}" Margin="0,0,0,15"/>
+
+                            <!-- Индикатор статуса -->
+                            <Border x:Name="borderStatus" CornerRadius="10" Background="#F38BA8" Padding="15,10">
+                                <Grid>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock x:Name="tbStatusIcon" Text="⛔" FontSize="18" Foreground="#1E1E2E"
+                                                   VerticalAlignment="Center" Margin="0,0,10,0"/>
+                                        <TextBlock x:Name="tbStatusText" Text="Распрыжка ВЫКЛЮЧЕНА" FontSize="16"
+                                                   FontWeight="Bold" Foreground="#1E1E2E" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                    <ProgressBar x:Name="progressBar" Height="4" Maximum="100" Value="0"
+                                                 Foreground="#1E1E2E" Background="Transparent" VerticalAlignment="Bottom"
+                                                 HorizontalAlignment="Stretch" Margin="0,0,0,-5" Visibility="Collapsed"/>
+                                </Grid>
+                            </Border>
+
+                            <!-- Статистика -->
+                            <StackPanel Margin="0,15,0,0">
+                                <Grid>
+                                    <TextBlock Text="Статистика:" Style="{StaticResource LabelText}"/>
+                                    <Button x:Name="btnResetStats" Content="🔄" Width="30" Height="30"
+                                            HorizontalAlignment="Right" Background="Transparent" Foreground="#89B4FA"
+                                            BorderThickness="0" Click="btnResetStats_Click" ToolTip="Сбросить статистику"/>
+                                </Grid>
+                                <Grid>
+                                    <TextBlock Text="Всего прыжков:" Style="{StaticResource LabelText}"/>
+                                    <TextBlock x:Name="tbTotalJumps" Text="0" Foreground="#F9E2AF"
+                                               FontSize="14" FontWeight="Bold" HorizontalAlignment="Right"/>
+                                </Grid>
+                                <Grid>
+                                    <TextBlock Text="Активное время:" Style="{StaticResource LabelText}"/>
+                                    <TextBlock x:Name="tbActiveTime" Text="00:00:00" Foreground="#F9E2AF"
+                                               FontSize="14" FontWeight="Bold" HorizontalAlignment="Right"/>
+                                </Grid>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Кнопки управления -->
+                    <Grid Margin="0,0,0,15">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="btnSave" Content="💾 Сохранить" Style="{StaticResource ModernButton}"
+                                Background="#74C7EC" Foreground="#1E1E2E" Click="btnSave_Click"/>
+                        <Button x:Name="btnToggle" Content="🔴 Выключено" Style="{StaticResource ModernButton}"
+                                Grid.Column="2" Background="#F38BA8" Foreground="#1E1E2E" Click="btnToggle_Click"/>
+                    </Grid>
+
+                    <Button x:Name="btnHide" Content="📌 Скрыть в трей" Style="{StaticResource ModernButton}"
+                            Background="#585B70" Click="btnHide_Click"/>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Border>
+</Window>
